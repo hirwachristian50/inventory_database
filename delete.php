@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+// session_start();
 require 'authentication.php';
 require 'connection.php';
 

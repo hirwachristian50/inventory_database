@@ -1,84 +1,51 @@
-# Inventory Management System
+1. Starting a Session
+In every PHP file that needs login checking, I started the session at the top:
+session_start();
 
-## RP Tumba College
-**Module:** Develop Backend using PHP  
-**Level:** 6, Year 2  
-**Learning Unit:** 3  
-**Individual Assignment**  
+This allows PHP to access session data, create new sessions, and store user information.
 
----
+2. Session Creation During Login
+When a user logs in successfully, their username is stored in the session:
+$_SESSION['username'] = $username;
 
-## Project Overview
-This is a **simple Inventory Management System** developed using **PHP** and **MySQL**.  
-It allows users to:  
-- Sign up and log in  
-- Add new items  
-- Update existing items  
-- Delete items  
-- View all items in a table  
+3. Session Creation During Sign-Up
+After registration, the username is also stored in the session:
+$_SESSION['username'] = $username;
 
----
+4. Protecting Pages With Sessions
+Protected pages check if username session exists:
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
 
-## Features / Interfaces
+5. Logging Out
+Logout destroys the session completely:
+session_start();
+session_unset();
+session_destroy();
+header("Location: login.php");
 
-### 1. Signup Page
-- **File:** `signup.php`  
-- **Purpose:** Allows a new user to register an account.  
-- **Inputs:** Username, Email, Password  
-- **Screenshot:**  
-![alt text](<Screenshot 2025-11-17 093933.png>)
+Q3. Authentication Security in My Project
 
----
+1. Password Hashing
+Passwords are hashed before saving:
+$hashed = password_hash($password, PASSWORD_DEFAULT);
 
-### 2. Login Page
-- **File:** `login.php`  
-- **Purpose:** Allows a registered user to log in.  
-- **Inputs:** Username, Password  
-- **Screenshot:**  
-![Login Page](screenshots/login.png)  
+Verified during login:
+password_verify($password, $hashed);
 
----
+2. Secure Login Verification
+Checks if username exists, then verifies password.
 
-### 3. Dashboard
-- **File:** `dashboard.php`  
-- **Purpose:** Main page after login. Shows all items and provides options to add, update, or delete items.  
-- **Screenshot:**  
-![Dashboard](screenshots/dashboard.png)  
+3. Session-Based Authentication
+Authentication relies on $_SESSION['username'].
 
----
+4. Input Validation
+All user inputs are validated before use.
 
-### 4. Add Item
-- **File:** `insert.php`  
-- **Purpose:** Handles adding new items to the database.  
-- **Inputs:** Item Name, Quantity  
-
----
-
-### 5. Update Item
-- **File:** `update.php`  
-- **Purpose:** Allows updating name or quantity of an existing item.  
-- **Inputs:** Item Name, Quantity  
-
----
-
-### 6. Delete Item
-- **File:** `delete.php`  
-- **Purpose:** Deletes a selected item from the database.  
-
----
-
-### 7. Logout
-- **File:** `logout.php`  
-- **Purpose:** Ends the user session and redirects to login page.  
-
----
-
-## Database
-- **Database Name:** `inventory_database`  
-- **Tables:** `users`, `items`  
-- **SQL Export File:** `inventory_database.sql` (included in repo)  
-
-**Note:** Import the SQL file in phpMyAdmin to create the database and tables.  
-
----
-
+![alt text](<screenshot/Screenshot 2025-11-17 101123.png>)
+![alt text](<screenshot/Screenshot 2025-11-17 101441.png>)
+![alt text](<screenshot/Screenshot 2025-11-17 101505.png>)
+![alt text](<screenshot/Screenshot 2025-11-17 101530.png>)

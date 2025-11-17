@@ -1,3 +1,6 @@
+<?php
+include "connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,7 @@
 
 <?php 
 
-require 'connection.php';
+
 
 if(isset($_POST['sub'])){
 
@@ -28,7 +31,9 @@ if(isset($_POST['sub'])){
     $password=$_POST['password'];
     // $created_at=$_POST['created_at'];
 
-    $signup=mysqli_query($conn,"INSERT INTO users(username,email,password) VALUES('$username','$email','$password')");
+    $hashed=password_hash($password,PASSWORD_DEFAULT);
+
+    $signup=mysqli_query($conn,"INSERT INTO users(username,email,password) VALUES('$username','$email','$hashed')");
 
     if($signup){
 
