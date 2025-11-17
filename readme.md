@@ -26,7 +26,7 @@ It allows users to:
 - **Purpose:** Allows a new user to register an account.  
 - **Inputs:** Username, Email, Password  
 - **Screenshot:**  
-![Signup Page](screenshots/signup.png)  
+![alt text](<Screenshot 2025-11-17 093933.png>)
 
 ---
 
